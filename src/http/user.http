@@ -1,9 +1,5 @@
 @host = http://localhost:3001/api
-#########
-######### Retrieve all users
-#########
-GET {{host}}/user 
-content-type: application/json
+
 #########
 ######### Search users
 ######### query = search 
@@ -18,9 +14,11 @@ POST {{host}}/user
 content-type: application/json
 
 {
-    "fullName": "Dianne Pu Ramos",
-    "mobileNumber": "09782922202"
+    "fullName": "test 1",
+    "mobileNumber": "09111111111"
 }
+
+
 #########
 ######### Update user
 ######### query = _id
@@ -31,3 +29,10 @@ content-type: application/json
    "fullName": "Dianne Pu Ramos",
     "mobileNumber": "09782922203"
 }
+
+
+#########
+######### DELETE user
+######### body = _id
+DELETE {{host}}/user?_id=62e827b32004fab2fe00a7b7
+content-type: application/json

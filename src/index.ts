@@ -2,8 +2,8 @@ import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
 import session from "express-session";
-// import compression from "compression";
-// import helmet from "helmet";
+import compression from "compression";
+import helmet from "helmet";
 import dbconnect from "./db/dbconnect";
 import { logger } from "./utils";
 import { userRoutes } from "./routes";
@@ -21,12 +21,12 @@ const main = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(
     cors({
-      origin: ["http://localhost:3000", "http://192.168.55.192:3000"],
+      origin: ["http://localhost:3000", "http://192.168.55.192:3000", `${process.env.CLIENT_HOST}`],
       credentials: true,
     })
   );
-  // app.use(helmet());
-  // app.use(compression());
+  app.use(helmet());
+  app.use(compression());
   /** session */
   var store = new MongoDBSession({
     uri: `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`,

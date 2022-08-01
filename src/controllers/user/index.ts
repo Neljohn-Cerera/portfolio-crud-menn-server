@@ -2,7 +2,12 @@ import { Request, Response } from "express";
 import { returnError, returnOk } from "../../helper";
 import { MUserProps, IUserProps } from "../../types/models";
 import { UserModel } from "../../models";
-import { createRepo, findById, updateOneRepo } from "../../repository";
+import {
+  createRepo,
+  deleteByIdRepo,
+  findById,
+  updateOneRepo,
+} from "../../repository";
 import { FIELDS_USER } from "../../constants";
 
 /**
@@ -58,6 +63,26 @@ const updateUser = async (req: Request, res: Response): Promise<Response> => {
     return returnError(req, res);
   }
 };
+/**
+ * Controller delete user
+ *
+ * @param req `Request`
+ * @param res `Response`
+ * @returns `Promise`
+ */
+const deleteUser = async (req: Request, res: Response): Promise<Response> => {
+  let { _id } = req.query;
+
+  try {
+    const userDelete = await deleteByIdRepo<MUserProps>(_id as any, UserModel);
+    if (!userDelete) {
+      return returnError(req, res);
+    }
+    return returnOk(res, { data: userDelete });
+  } catch (error) {
+    return returnError(req, res);
+  }
+};
 
 /**
  * Controller search user
@@ -85,5 +110,6 @@ const searchUser = async (req: Request, res: Response): Promise<Response> => {
 export default {
   createUser,
   updateUser,
+  deleteUser,
   searchUser,
 };
