@@ -6,7 +6,7 @@ import session from "express-session";
 // import helmet from "helmet";
 import dbconnect from "./db/dbconnect";
 import { logger } from "./utils";
-import { accountRoutes, userRoutes } from "./routes";
+import { userRoutes } from "./routes";
 import { IS_PROD, PORT } from "./constants";
 var MongoDBSession = require("connect-mongodb-session")(session);
 
@@ -21,7 +21,7 @@ const main = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(
     cors({
-      origin: ["http://localhost:3000"],
+      origin: ["http://localhost:3000", "http://192.168.55.192:3000"],
       credentials: true,
     })
   );
@@ -47,7 +47,6 @@ const main = async () => {
     })
   );
   /** api routes  */
-  app.use("/api/account", accountRoutes);
   app.use("/api/user", userRoutes);
   /** listens */
   app.listen(PORT, () =>

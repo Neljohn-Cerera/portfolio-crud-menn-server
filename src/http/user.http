@@ -6,19 +6,11 @@ GET {{host}}/user
 content-type: application/json
 #########
 ######### Search users
-######### query = search & level
-GET {{host}}/user/search?text=Neljohn&level=Level 3
+######### query = search 
+GET {{host}}/user/search?text=
 content-type: application/json
-#########
-######### Retrieve user by id
-######### para = :_id
-GET {{host}}/user/6252824a04ec9feea12dd858
-content-type: application/json
-#########
-######### Retrieve user by fullName
-######### query = fullName
-GET {{host}}/user/findone?fullName=Neljohn R Cerer
-content-type: application/json
+
+
 #########
 ######### Insert userr
 #########
@@ -27,22 +19,15 @@ content-type: application/json
 
 {
     "fullName": "Dianne Pu Ramos",
-    "gender": "Female",
-    "birthDate": "2000-08-21",
-    "address": "Toril Davao City",
-    "accessLevel": "Level 3",
-    "email": "ramos@gmail.com",
     "mobileNumber": "09782922202"
 }
 #########
 ######### Update user
 ######### query = _id
-PUT {{host}}/user?_id=626f15eb3f54593d609f5b10
+PUT {{host}}/user?_id=62e7925fb2ffb3f9ef227252
 content-type: application/json
 
 {
-    "fullName": "Neljohn R Cerera",
-    "gender": "male",
-    "birthDate": "1993-08-20",
-    "address": "Toril Davao City"
+   "fullName": "Dianne Pu Ramos",
+    "mobileNumber": "09782922203"
 }

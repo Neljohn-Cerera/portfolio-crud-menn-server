@@ -1,12 +1,6 @@
 import { body, ValidationChain, query } from "express-validator";
 import { UserModel } from "../../../../models";
-import {
-  GENDERS,
-  FULLNAME,
-  GENDER,
-  BIRTHDATE,
-  ADDRESS,
-} from "./../../../../constants/index";
+import { FULLNAME, MOBILE_NUMBER } from "./../../../../constants/index";
 
 const validatePutRequest: ValidationChain[] = [
   query("_id")
@@ -33,22 +27,10 @@ const validatePutRequest: ValidationChain[] = [
     )
     .trim()
     .toLowerCase(),
-  body(GENDER)
-    .isIn(GENDERS)
-    .withMessage(`Must have a valid gender.[${GENDERS}]`),
-  body(BIRTHDATE).isDate().withMessage(`Must have a valid birthdate`),
-  body(ADDRESS)
+  body(MOBILE_NUMBER)
     .rtrim()
-    .isString()
-    .isLength({
-      max: 200,
-      min: 10,
-    })
-    .withMessage(
-      "Must be string.Minimum of 10 characters.Maximum of 200 characters`"
-    )
-    .trim()
-    .toLowerCase(),
+    .isMobilePhone(["en-PH"])
+    .withMessage("Must be a valid phone number"),
 ];
 
 export default validatePutRequest;
