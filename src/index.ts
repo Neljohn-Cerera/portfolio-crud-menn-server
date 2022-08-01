@@ -21,7 +21,11 @@ const main = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(
     cors({
-      origin: ["http://localhost:3000", "http://192.168.55.192:3000", `${process.env.CLIENT_HOST}`],
+      origin: [
+        "http://localhost:3000",
+        "http://192.168.55.192:3000",
+        `${process.env.CLIENT_HOST}`,
+      ],
       credentials: true,
     })
   );
@@ -29,7 +33,7 @@ const main = async () => {
   app.use(compression());
   /** session */
   var store = new MongoDBSession({
-    uri: `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`,
+    uri: `${process.env.DB_HOST}`,
     collection: "sessions",
     maxAge: 28800, // 28800 secs is 8 hours
   });
@@ -55,5 +59,6 @@ const main = async () => {
 };
 // server call
 main().catch((err) => {
+
   logger.error("Main server error : ", err);
 });
